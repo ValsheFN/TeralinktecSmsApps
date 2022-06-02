@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TeralinktecSmsApps.API.Controllers
@@ -18,6 +19,9 @@ namespace TeralinktecSmsApps.API.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Get weather forecast
+        /// </summary>
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
