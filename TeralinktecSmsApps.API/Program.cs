@@ -1,5 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -9,9 +10,26 @@ using TeralinktecSmsApps.API.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connstring = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connstring));
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequiredLength = 6;
+}).AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddScoped(sp => new AuthOptions
+{
+    Audience = builder.Configuration["AuthSettings:Audience"],
+    Issuer = builder.Configuration["AuthSettings:Issuer"],
+    Key = builder.Configuration["AuthSettings:Key"]
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -57,6 +75,8 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+await Seed.SeedUsersAndRolesAsync(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

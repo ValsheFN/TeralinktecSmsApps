@@ -39,3 +39,9 @@ System.InvalidOperationException: No authenticationScheme was specified, and the
 2022-06-02 12:09:35.772 +07:00 [INF] Application started. Press Ctrl+C to shut down.
 2022-06-02 12:09:35.774 +07:00 [INF] Hosting environment: Development
 2022-06-02 12:09:35.775 +07:00 [INF] Content root path: C:\Users\myspa\source\repos\ValsheFN\TeralinktecSmsApps\TeralinktecSmsApps\TeralinktecSmsApps.API\
+2022-06-02 14:37:05.022 +07:00 [WRN] There are multiple relationships between 'Contact' and 'ApplicationUser' without configured foreign key properties. This will cause Entity Framework to create shadow properties on 'Contact' with names dependent on the discovery order. Consider configuring the foreign key properties using the [ForeignKey] attribute or in 'OnModelCreating'.
+2022-06-02 14:41:51.823 +07:00 [INF] Now listening on: https://localhost:7108
+2022-06-02 14:41:51.862 +07:00 [INF] Now listening on: http://localhost:5108
+2022-06-02 14:41:51.877 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-02 14:41:51.878 +07:00 [INF] Hosting environment: Development
+2022-06-02 14:41:51.879 +07:00 [INF] Content root path: C:\Users\myspa\source\repos\ValsheFN\TeralinktecSmsApps\TeralinktecSmsApps\TeralinktecSmsApps.API\
